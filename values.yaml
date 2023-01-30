@@ -1,0 +1,12 @@
+image:
+   name: nisarjava/hellok8s
+   replicationCount: 1
+   tag: latest
+   pullPolicy: IfNotPresent
+
+service:
+    type: LoadBalancer
+    externalPort: 8080
+    internalPort: 8080
+    internalDebugPort: 5005
+    externalDebug_port: 5005

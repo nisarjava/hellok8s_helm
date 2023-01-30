@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellok8s
+  labels:
+    name:  ok
+spec:
+  replicas: {{ .Values.image.replicationCount }}
+  selector:
+    matchLabels:
+      app: hellok8s
+  template:
+    metadata:
+      labels:
+        app: hellok8s
+    spec:
+      containers:
+        - name: hellok8s
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+              name: "http"
+            - containerPort: {{ .Values.service.internalDebugPort }}
+              name: "debug"
